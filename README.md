@@ -1,0 +1,2 @@
+# Kayttojarjestelmat_ja_systeemiohjelmointi
+Kurssin miniprojektit löytyvät täältä.
