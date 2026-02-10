@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+
 
 int main(int argc, char *argv[]){
    
@@ -15,7 +17,7 @@ int main(int argc, char *argv[]){
         char **pReverseLines = NULL;
         //source for getline():https://man7.org/linux/man-pages/man3/getline.3.html
         size_t lineSize = 0;
-        __ssize_t read;
+        ssize_t read;
 
         int count =0;
         int newMemorySize =0;
@@ -51,7 +53,16 @@ int main(int argc, char *argv[]){
             }
 
             for(int i = count -1; i >= 0; i--){
-                printf("%s", pReverseLines[i]);
+                /*printf("%s", pReverseLines[i]);*/
+                //source:https://man7.org/linux/man-pages/man3/fputs.3p.html
+                fputs(pReverseLines[i], stdout);
+
+                int lineLenght = strlen(pReverseLines[i]);
+                if (lineLenght == 0 || pReverseLines[i][lineLenght - 1] != '\n') {
+                    //source:https://www.wscubetech.com/resources/c-programming/putchar
+                    putchar('\n');
+                }
+                
                 free(pReverseLines[i]);
             }
             free(pReverseLines);
@@ -106,6 +117,7 @@ int main(int argc, char *argv[]){
             count++;    
             }
 
+            
             for(int i = count -1; i >= 0; i--){
 
                 fprintf(outputfile, "%s", pReverseLines[i]);
