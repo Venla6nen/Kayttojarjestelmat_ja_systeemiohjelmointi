@@ -23,6 +23,7 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+//Added system call getreadcount
 int getreadcount(void);
 
 // ulib.c

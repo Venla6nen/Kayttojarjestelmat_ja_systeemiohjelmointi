@@ -16,6 +16,8 @@
 #include "file.h"
 #include "fcntl.h"
 
+
+//Readcount variable to track how many times read() system call has been called
 int readcount = 0;
 
 
@@ -75,6 +77,7 @@ sys_read(void)
   struct file *f;
   int n;
   char *p;
+  //Readcount increasing every time read() is called
   readcount++;
   if(argfd(0, 0, &f) < 0 || argint(2, &n) < 0 || argptr(1, &p, n) < 0)
     return -1;
@@ -447,6 +450,7 @@ sys_pipe(void)
   return 0;
 }
 
+//Added system call to return readcount value
 int 
 sys_getreadcount(void){
   return readcount;
