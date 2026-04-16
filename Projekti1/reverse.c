@@ -166,6 +166,14 @@ int main(int argc, char *argv[]){
         int newMemorySize =0;
         char **ptrNewMemorySize =NULL;
 
+        //Error handling if input and output files are same.
+        //source for idea:https://cplusplus.com/forum/beginner/51957/
+        //source for strcmp: https://man7.org/linux/man-pages/man3/strcmp.3.html
+        if(strcmp(argv[1], argv[2])==0){
+            fprintf(stderr,"Input and output file must differ\n");
+            exit(1);
+        }
+
         //Open file for reading input lines and writing output lines.
         FILE *inputfile;
         inputfile =fopen(argv[1], "r"); 
@@ -182,17 +190,6 @@ int main(int argc, char *argv[]){
             exit(1);
         }
 
-        //Error handling if input and output files are same.
-        //source for idea:https://cplusplus.com/forum/beginner/51957/
-        //source for strcmp: https://man7.org/linux/man-pages/man3/strcmp.3.html
-        if(strcmp(argv[1], argv[2])==0){
-            fprintf(stderr,"Input and output file must differ\n");
-            exit(1);
-        }
-        /*if(inputfile==outputfile){
-            fprintf(stderr,"Input and output file must differ\n");
-            exit(1);
-        }*/
 
         //Read file line by line.
         while ((read = getline(&pLine, &lineSize, inputfile)) != -1){
