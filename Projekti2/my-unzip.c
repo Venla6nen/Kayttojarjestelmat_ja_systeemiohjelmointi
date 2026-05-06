@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Check the arguments
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         printf("my-unzip: file1 [file2 ...]\n");
@@ -16,9 +17,10 @@ int main(int argc, char *argv[]) {
 
         int count;
         char c;
-        
+        //Read the 4-byte integer and then the single character
         while (fread(&count, sizeof(int), 1, fp) == 1) {
             if (fread(&c, sizeof(char), 1, fp) == 1) {
+                //Print the counted amount out
                 for (int j = 0; j < count; j++) {
                     printf("%c", c);
                 }
